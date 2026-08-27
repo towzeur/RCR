@@ -182,6 +182,20 @@
       text-align: center;
       font-size: 1.02rem;
     }
+    .equation.stack {
+      text-align: left;
+      display: grid;
+      gap: 10px;
+    }
+    .eq-label {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -292,6 +306,16 @@
             $\mathrm{ClassIL}(x)=\mathbf{1}\{\hat{\tau}(x)=\tau(y)\}\,\mathbf{1}\{\hat{y}(x)=y\mid\hat{\tau}(x)=\tau(y)\}.$
           </div>
           <p>Route accuracy measures whether the global argmax lands in the correct task block. It is read from the classifier output; it is not a learned task oracle.</p>
+          <div class="equation stack">
+            <div>
+              <span class="eq-label">Global prediction</span>
+              $\hat y(x)=\arg\max_{c\in\mathcal C_t} s(x,c),\qquad \hat\tau(x)=\tau(\hat y(x)).$
+            </div>
+            <div>
+              <span class="eq-label">Route accuracy</span>
+              $\mathrm{RouteAcc}=\mathbb E_{(x,y)}\left[\mathbf{1}\{\hat\tau(x)=\tau(y)\}\right].$
+            </div>
+          </div>
         </div>
         <div class="figure">
           <img src="assets/replay_blind_spot.png" alt="Replay blind spot for routing drift.">
@@ -317,8 +341,27 @@
           <p>Add radial plausibility with competitive radii and NC-consistent shrinkage.</p>
         </div>
       </div>
-      <div class="equation">
-        $s_{\mathrm{RCR}}(x,c)=\omega\,\mathrm{Std}_c(s_{\mathrm{ETF}}(x,c))+(1-\omega)\,\mathrm{Std}_c(s_{\mathrm{rad}}(x,c)).$
+      <div class="equation stack">
+        <div>
+          <span class="eq-label">ETF evidence</span>
+          $s_{\mathrm{ETF}}(x,c)=\langle z(x),u_c\rangle,$
+          where $u_c$ is the current ETF vertex.
+        </div>
+        <div>
+          <span class="eq-label">Transported, NC-shrunk representative</span>
+          $p_c^t=\mathrm{norm}\!\left(A_t p_c^{t-1}\right),\qquad
+          \tilde p_c=\mathrm{norm}\!\left((1-\alpha_c)p_c^t+\alpha_c u_c\right).$
+        </div>
+        <div>
+          <span class="eq-label">Radial plausibility</span>
+          $d_{\cos}(a,b)=1-\langle a,b\rangle,\qquad
+          s_{\mathrm{rad}}(x,c)=-\,d_{\cos}(z(x),\tilde p_c)/(\rho_c+\varepsilon).$
+        </div>
+        <div>
+          <span class="eq-label">RCR score</span>
+          $s_{\mathrm{RCR}}(x,c)=\omega\,\mathrm{Std}_c(s_{\mathrm{ETF}}(x,c))+
+          (1-\omega)\,\mathrm{Std}_c(s_{\mathrm{rad}}(x,c)).$
+        </div>
       </div>
       <p>When progressive neural collapse is exact, transported representatives coincide with ETF vertices and RCR reduces to the normalized nearest-ETF classifier. Decisions change when class centers drift away from the ideal ETF geometry or class reliabilities become heterogeneous.</p>
       <div class="figure" style="margin-top:18px">
