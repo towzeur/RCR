@@ -262,13 +262,13 @@
     tbody tr.method td { color: var(--green); font-weight: 720; }
     .delta { color: var(--green); font-weight: 720; }
     .small { color: var(--muted); font-size: 0.9rem; }
-    .resource-list {
+    .release-list {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
       margin-top: 16px;
     }
-    .resource {
+    .release-item {
       padding: 15px;
       border: 1px solid var(--line);
       border-radius: 7px;
@@ -362,7 +362,7 @@
       font-size: 0.9rem;
     }
     @media (max-width: 820px) {
-      .two-col, .three-col, .stat-grid, .resource-list { grid-template-columns: 1fr; }
+      .two-col, .three-col, .stat-grid, .release-list { grid-template-columns: 1fr; }
       .quick-read { grid-template-columns: 1fr; }
       .quick-read div:nth-child(odd) { border-bottom: 0; }
       .quick-read div:nth-last-child(2) { border-bottom: 0; }
@@ -383,7 +383,7 @@
       <div class="links" aria-label="Project links">
         <a class="button primary" href="assets/paper.pdf">Paper</a>
         <a class="button" href="assets/supplement.pdf">Supplementary</a>
-        <a class="button" href="https://github.com/towzeur/RCR">Code &amp; Artifacts</a>
+        <a class="button" href="https://github.com/towzeur/RCR">Repository</a>
         <a class="button" href="#bibtex">BibTeX</a>
       </div>
     </div>
@@ -395,7 +395,7 @@
     <a href="#diagnostic">Diagnostic</a>
     <a href="#method">Method</a>
     <a href="#results">Results</a>
-    <a href="#resources">Resources</a>
+    <a href="#release">Release</a>
     <a href="#bibtex">Citation</a>
   </nav>
 
@@ -533,10 +533,10 @@
           <tr>
             <th>Dataset / buffer 200</th>
             <th>Score</th>
-            <th>Class FAA</th>
-            <th>Class FF</th>
-            <th>Task FAA</th>
-            <th>Route</th>
+            <th>Class FAA ↑</th>
+            <th>Class FF ↓</th>
+            <th>Task FAA ↑</th>
+            <th>Route ↑</th>
           </tr>
         </thead>
         <tbody>
@@ -553,10 +553,10 @@
           <tr>
             <th>Dataset / buffer 500</th>
             <th>Score</th>
-            <th>Class FAA</th>
-            <th>Class FF</th>
-            <th>Task FAA</th>
-            <th>Route</th>
+            <th>Class FAA ↑</th>
+            <th>Class FF ↓</th>
+            <th>Task FAA ↑</th>
+            <th>Route ↑</th>
           </tr>
         </thead>
         <tbody>
@@ -571,14 +571,12 @@
       <p class="small">FAA: final average accuracy. FF: final forgetting. Full literature comparisons and ablations are in the paper and supplementary material.</p>
     </section>
 
-    <section id="resources">
-      <h2>Resources</h2>
-      <p>The repository hosts the project page and will contain the code, scripts, and lightweight artifacts for reproducing the RCR scoring head.</p>
-      <div class="resource-list">
-        <a class="resource" href="assets/paper.pdf"><strong>Paper</strong><br><span class="small">Camera-ready PDF</span></a>
-        <a class="resource" href="assets/supplement.pdf"><strong>Supplement</strong><br><span class="small">Supplementary PDF</span></a>
-        <a class="resource" href="assets/supplement.zip"><strong>Supplement ZIP</strong><br><span class="small">BMVC upload package</span></a>
-        <a class="resource" href="https://github.com/towzeur/RCR"><strong>Repository</strong><br><span class="small">Code and artifacts</span></a>
+    <section id="release">
+      <h2>Release Status</h2>
+      <div class="release-list">
+        <div class="release-item"><strong>Paper and supplement</strong><br><span class="small">Available from the buttons above.</span></div>
+        <div class="release-item"><strong>RCR scoring code</strong><br><span class="small">Coming soon.</span></div>
+        <div class="release-item"><strong>Evaluation artifacts</strong><br><span class="small">Scripts, configs, and lightweight result metadata coming soon.</span></div>
       </div>
     </section>
 
