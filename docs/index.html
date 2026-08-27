@@ -157,6 +157,30 @@
       gap: 14px;
       margin-top: 18px;
     }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .stat {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--soft);
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      color: var(--blue);
+      font-size: 1.35rem;
+      line-height: 1.15;
+      margin-bottom: 3px;
+    }
+    .stat span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
     .claim {
       padding: 15px;
       border: 1px solid var(--line);
@@ -230,6 +254,26 @@
       border-radius: 7px;
       background: var(--soft);
     }
+    .takeaway-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .takeaway-list li {
+      margin: 9px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+    .takeaway-list li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 0.68em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
     pre {
       margin: 12px 0 0;
       padding: 16px;
@@ -249,7 +293,7 @@
       font-size: 0.9rem;
     }
     @media (max-width: 820px) {
-      .two-col, .three-col, .resource-list { grid-template-columns: 1fr; }
+      .two-col, .three-col, .stat-grid, .resource-list { grid-template-columns: 1fr; }
       th, td { font-size: 0.86rem; padding: 8px 5px; }
       nav.toc { gap: 12px; }
       section { padding: 28px 0; }
@@ -274,6 +318,7 @@
   </header>
 
   <nav class="toc container" aria-label="Page navigation">
+    <a href="#takeaways">Takeaways</a>
     <a href="#abstract">Abstract</a>
     <a href="#diagnostic">Diagnostic</a>
     <a href="#method">Method</a>
@@ -290,6 +335,22 @@
       </div>
     </section>
 
+    <section id="takeaways">
+      <h2>Takeaways</h2>
+      <p class="lead">The paper studies a narrow but important failure mode of neural-collapse continual classifiers: the representation can remain discriminative inside each task, while the global classifier routes examples to the wrong task block.</p>
+      <div class="stat-grid" aria-label="Paper highlights">
+        <div class="stat"><strong>5/6</strong><span>best Class-IL FAA settings</span></div>
+        <div class="stat"><strong>6/6</strong><span>lower Class-IL forgetting settings</span></div>
+        <div class="stat"><strong>+8.03</strong><span>Class FAA in paired eval</span></div>
+        <div class="stat"><strong>+8.62</strong><span>route accuracy in paired eval</span></div>
+      </div>
+      <ul class="takeaway-list">
+        <li><strong>Routing drift is measurable.</strong> Route accuracy separates cross-task score comparability from within-task class discrimination.</li>
+        <li><strong>Replay can hide the failure.</strong> Stored samples often stay well routed even when held-out samples from the same old classes collapse toward newer task blocks.</li>
+        <li><strong>RCR is a classifier-level correction.</strong> It keeps the trained backbone and ETF frame fixed, then composes global ETF evidence with local radial reliability around transported class representatives.</li>
+      </ul>
+    </section>
+
     <section id="abstract">
       <h2>Abstract</h2>
       <p class="lead">Progressive neural-collapse classifiers can learn strong task-local decision boundaries while failing the global Class-IL decision. We identify this failure as <strong>routing drift</strong>: a held-out sample can remain separable within its true task block, yet receive its largest global score from another block.</p>
@@ -301,6 +362,7 @@
       <h2>Routing Drift</h2>
       <div class="two-col">
         <div>
+          <p><strong>Problem.</strong> Class-IL accuracy is a product of two decisions, but standard reporting usually exposes only the final product. This can make a model look like it forgot the old classes, even when most of the remaining error is a cross-task routing error.</p>
           <p>Class-IL correctness requires two events: the predicted class must fall in the correct task block, and the within-block class decision must be correct. In progressive ETF classifiers, the second event can remain strong while the first collapses.</p>
           <div class="equation">
             $\mathrm{ClassIL}(x)=\mathbf{1}\{\hat{\tau}(x)=\tau(y)\}\,\mathbf{1}\{\hat{y}(x)=y\mid\hat{\tau}(x)=\tau(y)\}.$
@@ -327,6 +389,7 @@
     <section id="method">
       <h2>Reliability-Calibrated Routing</h2>
       <p>RCR is deliberately scoped as a classifier-level correction for progressive ETF models. It does not retrain the representation, fit a task router, or replace the global neural-collapse frame.</p>
+      <p>The method asks for two kinds of evidence before a class wins: global alignment with the ETF vertex, and local plausibility under the transported class measure. This keeps the neural-collapse classifier as the global reference while correcting the local reliability mismatch induced by feature drift.</p>
       <div class="three-col">
         <div class="claim">
           <span class="tag">ETF frame</span>
@@ -376,6 +439,7 @@
     <section id="results">
       <h2>Results</h2>
       <p>The paired comparison below evaluates $s_{\mathrm{ETF}}$ and $s_{\mathrm{RCR}}$ on the same frozen checkpoints over seeds 0, 1, and 2. RCR improves Class-IL and route accuracy together, while Task-IL remains stable.</p>
+      <p>The largest gains occur on CIFAR-100 and TinyImageNet, where the Task-IL / route gap is widest. CIFAR-10 with buffer 500 is already close to the neural-collapse ideal, so the gain is smaller; this is consistent with RCR being inactive when ETF geometry is already reliable.</p>
       <table aria-label="Paired RCR results for buffer size 200">
         <thead>
           <tr>
@@ -421,7 +485,7 @@
 
     <section id="resources">
       <h2>Resources</h2>
-      <p>The repository is organized to host both the project page and the code/artifacts for reproducing the RCR scoring head.</p>
+      <p>The repository hosts the project page and will contain the code, scripts, and lightweight artifacts for reproducing the RCR scoring head.</p>
       <div class="resource-list">
         <a class="resource" href="assets/paper.pdf"><strong>Paper</strong><br><span class="small">Camera-ready PDF</span></a>
         <a class="resource" href="assets/supplement.pdf"><strong>Supplement</strong><br><span class="small">Supplementary PDF</span></a>
@@ -443,7 +507,7 @@
   </main>
 
   <footer class="container">
-    Project page for the BMVC 2026 paper. Design kept intentionally static and lightweight for archival use.
+    © 2026 Nicolas Larue. Website adapted from the Academic Project Page Template and the Nerfies project page.
   </footer>
 </body>
 </html>
