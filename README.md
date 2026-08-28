@@ -16,27 +16,21 @@ this failure mode as routing drift and introduces Reliability-Calibrated Routing
 (RCR), a classifier-level correction that keeps the trained backbone and ETF
 frame fixed while combining global ETF evidence with local radial reliability.
 
-## Release Status
+## Coming Soon
 
-- Project page: available.
-- Camera-ready paper and supplementary PDF: available.
-- Minimal RCR scoring code: coming soon.
-- Evaluation scripts for frozen checkpoints: coming soon.
-- Configs for Seq-CIFAR-10, Seq-CIFAR-100, and Seq-TinyImageNet: coming soon.
-- Lightweight result artifacts and table-generation metadata: coming soon.
+Code, scripts, and reproducibility artifacts will be released here.
 
 ## Repository Layout
 
 ```text
-docs/        Project page served by GitHub Pages.
-rcr/         RCR scoring code. Coming soon.
-scripts/     Evaluation and figure/table generation scripts. Coming soon.
-configs/     Dataset and experiment configuration files. Coming soon.
-artifacts/   Lightweight generated summaries and metadata. Coming soon.
+docs/        Project page and paper assets.
+rcr/         RCR code and the continual-learning framework used for experiments.
+scripts/     Evaluation and artifact-generation entry points.
+configs/     Experiment configurations and run metadata.
+artifacts/   Reproducibility artifacts and cached evaluation summaries.
 ```
 
-The camera-ready paper and supplementary material are mirrored under
-`docs/assets/` so the project page remains self-contained.
+The paper and supplementary PDFs are mirrored in this repository.
 
 ## Citation
 
