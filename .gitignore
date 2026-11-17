@@ -8,5 +8,10 @@ venv/
 *.tmp
 *.bak
 runs/
+outputs/
 checkpoints/
 data/
+artifacts/paper_runs/
+*.pt
+*.pth
+*.tar.gz

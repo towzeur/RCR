@@ -1,0 +1,3 @@
+# CPU-only offline evaluation needs PyTorch, not the training framework.
+torch==2.5.1
+numpy==2.1.2

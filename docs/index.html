@@ -409,7 +409,7 @@
 
     <section id="takeaways">
       <h2>Takeaways</h2>
-      <p class="lead">The paper studies a narrow but important failure mode of neural-collapse continual classifiers: the representation can remain discriminative inside each task, while the global classifier routes examples to the wrong task block.</p>
+      <p class="lead">High Task-IL accuracy does not imply good Class-IL accuracy. Features can still distinguish classes within each task while the largest global score belongs to another task block.</p>
       <div class="stat-grid" aria-label="Paper highlights">
         <div class="stat"><strong>5/6</strong><span>best Class-IL FAA settings</span></div>
         <div class="stat"><strong>6/6</strong><span>lower Class-IL forgetting settings</span></div>
@@ -429,7 +429,7 @@
         <div>Method</div>
         <div>RCR keeps the ETF classifier fixed and adds transported, radius-calibrated class reliability evidence.</div>
         <div>Outcome</div>
-        <div>Class-IL FAA improves on five of six dataset/buffer settings, and forgetting decreases on all six.</div>
+        <div>Best reported Class-IL FAA on five of six dataset/buffer settings, with lower forgetting on all six.</div>
       </div>
     </section>
 
@@ -470,8 +470,8 @@
 
     <section id="method">
       <h2>Reliability-Calibrated Routing</h2>
-      <p>RCR is deliberately scoped as a classifier-level correction for progressive ETF models. It does not retrain the representation, fit a task router, or replace the global neural-collapse frame.</p>
-      <p>The method asks for two kinds of evidence before a class wins: global alignment with the ETF vertex, and local plausibility under the transported class measure. This keeps the neural-collapse classifier as the global reference while correcting the local reliability mismatch induced by feature drift.</p>
+      <p>RCR corrects the classifier while keeping the trained backbone and ETF weights fixed. It does not require retraining or a learned task router.</p>
+      <p>Each class receives two scores: alignment with its ETF vertex, and radial plausibility around its transported prototype. The second score accounts for differences in class dispersion after feature drift.</p>
       <div class="three-col">
         <div class="claim">
           <span class="tag">ETF frame</span>
@@ -495,17 +495,18 @@
         <div>
           <span class="eq-label">Transported, NC-shrunk representative</span>
           $p_c^t=\mathrm{norm}\!\left(A_t p_c^{t-1}\right),\qquad
-          \tilde p_c=\mathrm{norm}\!\left((1-\alpha_c)p_c^t+\alpha_c u_c\right).$
+          \tilde p_c=\mathrm{norm}\!\left(\alpha_c p_c^t+(1-\alpha_c)u_c\right).$
         </div>
         <div>
           <span class="eq-label">Radial plausibility</span>
-          $d_{\cos}(a,b)=1-\langle a,b\rangle,\qquad
+          $d_{\cos}(a,b)=2-2\langle a,b\rangle,\qquad
           s_{\mathrm{rad}}(x,c)=-\,d_{\cos}(z(x),\tilde p_c)/(\rho_c+\varepsilon).$
         </div>
         <div>
           <span class="eq-label">RCR score</span>
-          $s_{\mathrm{RCR}}(x,c)=\omega\,\mathrm{Std}_c(s_{\mathrm{ETF}}(x,c))+
-          (1-\omega)\,\mathrm{Std}_c(s_{\mathrm{rad}}(x,c)).$
+          $s_{\mathrm{RCR}}(x,c)=(1-\omega)\,\mathrm{Std}_c(s_{\mathrm{ETF}}(x,c))+
+          \omega\,\mathrm{Std}_c(s_{\mathrm{rad}}(x,c)),\qquad \omega=\frac{q}{q+1},$
+          where $q$ is the number of classes per task.
         </div>
       </div>
       <div class="steps" aria-label="RCR algorithm sketch">
@@ -514,7 +515,7 @@
         <div class="step"><div><strong>Estimate local reliability.</strong><br><span class="small">Competitive radii encode how much radial evidence each class should contribute.</span></div></div>
         <div class="step"><div><strong>Compose comparable scores.</strong><br><span class="small">The ETF and radial scores are standardized per sample and mixed with a fixed rule.</span></div></div>
       </div>
-      <p>When progressive neural collapse is exact, transported representatives coincide with ETF vertices and RCR reduces to the normalized nearest-ETF classifier. Decisions change when class centers drift away from the ideal ETF geometry or class reliabilities become heterogeneous.</p>
+      <p>When class centers coincide with ETF vertices and all radii agree, RCR makes the same class predictions as the ETF classifier. Its correction addresses deviations from this ideal geometry.</p>
       <div class="figure" style="margin-top:18px">
         <div class="two-col">
           <img src="assets/rcr_etf_view.png" alt="ETF-only view of a corrected routing case.">
@@ -572,11 +573,11 @@
     </section>
 
     <section id="release">
-      <h2>Release Status</h2>
+      <h2>Code and Checkpoints</h2>
       <div class="release-list">
-        <div class="release-item"><strong>Paper and supplement</strong><br><span class="small">Available from the buttons above.</span></div>
-        <div class="release-item"><strong>RCR scoring code</strong><br><span class="small">Coming soon.</span></div>
-        <div class="release-item"><strong>Evaluation artifacts</strong><br><span class="small">Scripts, configs, and lightweight result metadata coming soon.</span></div>
+        <div class="release-item"><strong>Paper and supplement</strong><br><span class="small">BMVC 2026 paper and supplementary material.</span></div>
+        <div class="release-item"><strong>RCR scoring code</strong><br><span class="small"><a href="https://github.com/towzeur/RCR">Code, evaluation scripts, and training configurations.</a></span></div>
+        <div class="release-item"><strong>Checkpoints and evaluation artifacts</strong><br><span class="small"><a href="https://github.com/towzeur/RCR/releases/tag/v1.0.0">Three seeds per dataset and replay budget, with SHA-256 checksums.</a></span></div>
       </div>
     </section>
 

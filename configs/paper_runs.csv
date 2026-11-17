@@ -1,0 +1,19 @@
+run,dataset,buffer,seed,epochs,lr,main_weight,distill_weight,ldcrad_start_task,lr_scheduler,lr_milestones,ldcrad_score_mix,ldcrad_mix_head,ldcrad_mix_norm,ldcrad_mix_rule,ldcrad_gate_temp,source_run
+seq_cifar10_buffer200_seed0,seq-cifar10,200,0,50,0.01,13,90,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b200_s0
+seq_cifar10_buffer200_seed1,seq-cifar10,200,1,50,0.01,13,90,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b200_s1
+seq_cifar10_buffer200_seed2,seq-cifar10,200,2,50,0.01,13,90,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b200_s2
+seq_cifar10_buffer500_seed0,seq-cifar10,500,0,50,0.01,12,80,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b500_s0
+seq_cifar10_buffer500_seed1,seq-cifar10,500,1,50,0.01,12,80,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b500_s1
+seq_cifar10_buffer500_seed2,seq-cifar10,500,2,50,0.01,12,80,3,multisteplr,"35 45",0.6666667,etf,sample,fixed,1.0,etfrad_cifar10_b500_s2
+seq_cifar100_buffer200_seed0,seq-cifar100,200,0,50,0.03,18,170,7,multisteplr,"35 45",0.625,ce,sample,fixed,2.0,cerad_cifar100_b200_s0
+seq_cifar100_buffer200_seed1,seq-cifar100,200,1,50,0.03,18,170,7,multisteplr,"35 45",0.9090909,etf,sample,fixed,1.0,etfrad_cifar100_b200_s1
+seq_cifar100_buffer200_seed2,seq-cifar100,200,2,50,0.03,18,170,7,multisteplr,"35 45",0.9090909,etf,sample,fixed,1.0,etfrad_cifar100_b200_s2
+seq_cifar100_buffer500_seed0,seq-cifar100,500,0,50,0.03,18,170,7,multisteplr,"35 45",0.625,ce,sample,fixed,2.0,cerad_cifar100_b500_s0
+seq_cifar100_buffer500_seed1,seq-cifar100,500,1,50,0.03,18,170,7,multisteplr,"35 45",0.9090909,etf,sample,fixed,1.0,etfrad_cifar100_b500_s1
+seq_cifar100_buffer500_seed2,seq-cifar100,500,2,50,0.03,18,170,7,multisteplr,"35 45",0.9090909,etf,sample,fixed,1.0,etfrad_cifar100_b500_s2
+seq_tinyimagenet_buffer200_seed0,seq-tinyimg,200,0,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b200_s0
+seq_tinyimagenet_buffer200_seed1,seq-tinyimg,200,1,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b200_s1
+seq_tinyimagenet_buffer200_seed2,seq-tinyimg,200,2,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b200_s2
+seq_tinyimagenet_buffer500_seed0,seq-tinyimg,500,0,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b500_s0
+seq_tinyimagenet_buffer500_seed1,seq-tinyimg,500,1,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b500_s1
+seq_tinyimagenet_buffer500_seed2,seq-tinyimg,500,2,100,0.03,20,165,7,multisteplr,"45 75 95",0.9523810,etf,sample,fixed,1.0,etfrad_tiny_b500_s2
