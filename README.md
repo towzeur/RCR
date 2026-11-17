@@ -85,6 +85,29 @@ training settings, and output files.
 
 Run the numerical tests with `python -m unittest discover -s tests -v`.
 
+## Results
+
+Mean over seeds 0, 1, and 2 (%). ETF and RCR use the same frozen ProNC
+checkpoints. The better result for each setting and metric is in bold.
+
+| Dataset | Buffer | Classifier | Class FAA &uarr; | Class FF &darr; | Task FAA &uarr; | Task FF &darr; | Route &uarr; |
+|---|---:|---|---:|---:|---:|---:|---:|
+| CIFAR-10 | 200 | ETF | 66.14 | 31.47 | **96.74** | **0.62** | 66.58 |
+|  |  | **RCR** | **70.36** | **22.85** | 96.67 | 0.73 | **70.82** |
+| CIFAR-10 | 500 | ETF | 72.16 | 24.18 | **96.82** | **0.47** | 72.71 |
+|  |  | **RCR** | **73.68** | **17.73** | 96.81 | 0.54 | **74.33** |
+| CIFAR-100 | 200 | ETF | 41.71 | 38.55 | 85.53 | 4.51 | 42.81 |
+|  |  | **RCR** | **49.74** | **16.27** | **87.28** | **2.36** | **51.43** |
+| CIFAR-100 | 500 | ETF | 48.65 | 23.16 | 85.54 | 4.29 | 50.14 |
+|  |  | **RCR** | **53.27** | **10.18** | **87.74** | **2.02** | **55.04** |
+| TinyImageNet | 200 | ETF | 25.77 | 43.45 | 68.30 | 9.58 | 28.58 |
+|  |  | **RCR** | **31.42** | **23.84** | **69.59** | **8.61** | **34.76** |
+| TinyImageNet | 500 | ETF | 26.61 | 41.16 | 67.71 | 9.78 | 29.37 |
+|  |  | **RCR** | **32.24** | **22.47** | **70.16** | **7.90** | **35.46** |
+
+FAA: final average accuracy; FF: final forgetting; Route: task-block routing
+accuracy. [Per-seed results](artifacts/evaluations/paper_runs/artifact_run_summary.csv).
+
 ## Repository Layout
 
 ```text
