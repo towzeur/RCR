@@ -1,4 +1,4 @@
-# When Neural Collapse Fails to Route
+# Reliability-Calibrated Routing (RCR)
 
 Official repository for the BMVC 2026 paper:
 

@@ -85,26 +85,45 @@
       flex-wrap: wrap;
       margin-top: 23px;
     }
-    .button {
+    .project-badge {
+      --badge-color: #3b5070;
+      --badge-ink: #fff;
+      --badge-surface: var(--soft);
       display: inline-flex;
+      min-height: 40px;
+      border-radius: 6px;
+      border: 1px solid var(--badge-color);
+      color: var(--ink);
+      background: var(--badge-surface);
+      font-size: 0.88rem;
+      font-weight: 650;
+      line-height: 1.22;
+    }
+    .project-badge span {
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 37px;
-      padding: 8px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--line);
-      color: var(--ink);
-      background: #fff;
-      font-size: 0.95rem;
-      font-weight: 650;
+      padding: 6px 10px;
     }
-    .button.primary {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
+    .project-badge .badge-name {
+      color: var(--badge-ink);
+      background: var(--badge-color);
+      border-radius: 4px 0 0 4px;
     }
-    .button:hover { text-decoration: none; background: var(--blue-soft); }
-    .button.primary:hover { background: #1d4a91; }
+    .badge-detail { flex: 1; }
+    .badge-paper { --badge-color: #9e2429; --badge-surface: #fff4f3; }
+    .badge-code { --badge-color: #282f3a; }
+    .badge-model {
+      --badge-color: #f4c644;
+      --badge-ink: #342808;
+      --badge-surface: #fff9e4;
+    }
+    .project-badge:hover { text-decoration: none; }
+    .project-badge:hover .badge-detail { text-decoration: underline; }
+    .project-badge:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
     nav.toc {
       display: flex;
       justify-content: center;
@@ -368,10 +387,14 @@
       .links {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: 320px;
+        max-width: 360px;
         margin-inline: auto;
       }
-      .button { min-height: 44px; padding-inline: 9px; }
+      .project-badge { min-height: 46px; font-size: 0.81rem; }
+      .project-badge span { padding-inline: 4px; }
+    }
+    @media (max-width: 350px) {
+      .project-badge span { padding-inline: 3px; }
     }
   </style>
 </head>
@@ -383,12 +406,24 @@
       <p class="subtitle">Routing drift in continual learning, and Reliability-Calibrated Routing for progressive ETF classifiers.</p>
       <div class="authors">Nicolas Larue</div>
       <div class="affiliation">ETIS, CY Cergy Paris Universite, ENSEA, CNRS, France</div>
-      <div class="links" aria-label="Project links">
-        <a class="button primary" href="https://arxiv.org/abs/2611.22429">arXiv</a>
-        <a class="button" href="https://github.com/towzeur/RCR">Code</a>
-        <a class="button" href="https://huggingface.co/towzeur/RCR">Checkpoints</a>
-        <a class="button" href="#bibtex">BibTeX</a>
-      </div>
+      <nav class="links" aria-label="Project links">
+        <a class="project-badge badge-paper" href="https://arxiv.org/abs/2611.22429">
+          <span class="badge-name">arXiv</span>
+          <span class="badge-detail">2611.22429</span>
+        </a>
+        <a class="project-badge badge-code" href="https://github.com/towzeur/RCR">
+          <span class="badge-name">GitHub</span>
+          <span class="badge-detail">Code</span>
+        </a>
+        <a class="project-badge badge-model" href="https://huggingface.co/towzeur/RCR">
+          <span class="badge-name">Hugging Face</span>
+          <span class="badge-detail">Models</span>
+        </a>
+        <a class="project-badge" href="#bibtex">
+          <span class="badge-name">BibTeX</span>
+          <span class="badge-detail">Citation</span>
+        </a>
+      </nav>
     </div>
   </header>
 
