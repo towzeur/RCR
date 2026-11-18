@@ -4,9 +4,10 @@ Official repository for the BMVC 2026 paper:
 
 **When Neural Collapse Fails to Route: Routing Drift in Continual Learning**
 
-[Project page](https://towzeur.github.io/RCR/) |
-[Paper](https://towzeur.github.io/RCR/assets/paper.pdf) |
-[Supplement](https://towzeur.github.io/RCR/assets/supplement.pdf)
+[![arXiv: 2611.22429](https://img.shields.io/badge/arXiv-2611.22429-B31B1B?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2611.22429)
+[![Project page](https://img.shields.io/badge/Project-Page-2457A7)](https://towzeur.github.io/RCR/)
+[![Hugging Face checkpoints](https://img.shields.io/badge/Hugging%20Face-Checkpoints-FFD21E?logo=huggingface)](https://huggingface.co/towzeur/RCR)
+[![Reproduction archives](https://img.shields.io/badge/GitHub-Reproduction%20archives-14744C?logo=github)](https://github.com/towzeur/RCR/releases/tag/v1.0.0)
 
 ## Overview
 
@@ -18,10 +19,12 @@ frame fixed while combining global ETF evidence with local radial reliability.
 
 ## Code and Checkpoints
 
-The [v1.0.0 release](https://github.com/towzeur/RCR/releases/tag/v1.0.0)
-provides final inference checkpoints and per-task feature artifacts for
-CIFAR-10, CIFAR-100, and TinyImageNet, with replay budgets 200/500 and seeds
-0, 1, and 2. Downloads are split into six archives, one per dataset/budget.
+Download individual inference checkpoints from
+[Hugging Face](https://huggingface.co/towzeur/RCR), or get the full
+[GitHub release archives](https://github.com/towzeur/RCR/releases/tag/v1.0.0)
+with checkpoints and per-task features. There is one archive per dataset
+(CIFAR-10, CIFAR-100, TinyImageNet) and replay budget (200 or 500), with
+seeds 0, 1, and 2 in each.
 
 The checkpoints contain the trained ResNet-18, ETF vertices, transported
 prototypes, and class radii. They exclude training images and optimizer state;
@@ -118,8 +121,6 @@ configs/     Experiment configurations and run metadata.
 artifacts/   Reproducibility artifacts and cached evaluation summaries.
 ```
 
-The paper and supplementary PDFs are mirrored in this repository.
-
 ## License
 
 The code is distributed under the MIT license; third-party notices and
@@ -133,6 +134,6 @@ exceptions are documented in [rcr/NOTICE.md](rcr/NOTICE.md) and the source files
   author    = {Larue, Nicolas},
   booktitle = {British Machine Vision Conference (BMVC)},
   year      = {2026},
-  url       = {https://towzeur.github.io/RCR/}
+  url       = {https://arxiv.org/abs/2611.22429}
 }
 ```
